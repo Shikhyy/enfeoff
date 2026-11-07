@@ -31,7 +31,7 @@ Wallets give agents all-or-nothing signing power, and multi-agent systems pass t
 Enfeoff turns that into a tree of **mandates**. An owner funds a vault and creates a root mandate. Every holder can delegate a strictly smaller mandate, and the chain checks every spend against the whole chain of ancestors.
 
 ```mermaid
-flowchart TD
+flowchart LR
   V[("Vault<br/>50 tUSDC")] --> C
   C["Captain<br/>cap 50 · pool, game, api"] --> T["Trader<br/>cap 20 · pool"]
   C --> M["Merchant<br/>cap 15 · game, api"]
