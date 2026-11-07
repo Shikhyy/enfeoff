@@ -123,15 +123,13 @@ export function Tilt({ children, max = 6, className }: { children: ReactNode; ma
 /** Surfaces where the sage dot would vanish, so the cursor switches to paper colour. */
 const DARK_SURFACES = ".section--ink, .section--sage, .panel, .footer, .scene, .marquee, .hero__scene, .hero__stick, .card--ink, .memo, .intro__ground";
 
-/** A solid sage dot with a softer ring that trails it, like the dot beside the wordmark in the moodboard. */
+/** A small solid sage square that follows the pointer. It grows over links and buttons. */
 export function Cursor() {
   const [on, setOn] = useState(false);
   const [big, setBig] = useState(false);
   const [dark, setDark] = useState(false);
   const dx = useSpring(-100, { stiffness: 1400, damping: 60, mass: 0.2 });
   const dy = useSpring(-100, { stiffness: 1400, damping: 60, mass: 0.2 });
-  const rx = useSpring(-100, { stiffness: 260, damping: 28, mass: 0.5 });
-  const ry = useSpring(-100, { stiffness: 260, damping: 28, mass: 0.5 });
   useEffect(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     setOn(true);
@@ -139,8 +137,6 @@ export function Cursor() {
     const move = (e: MouseEvent) => {
       dx.set(e.clientX);
       dy.set(e.clientY);
-      rx.set(e.clientX);
-      ry.set(e.clientY);
     };
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
@@ -154,15 +150,10 @@ export function Cursor() {
       window.removeEventListener("mouseover", over);
       document.documentElement.classList.remove("has-cursor");
     };
-  }, [dx, dy, rx, ry]);
+  }, [dx, dy]);
   if (!on) return null;
   const mods = `${big ? " cursor--big" : ""}${dark ? " cursor--dark" : ""}`;
-  return (
-    <>
-      <motion.div className={`cursor__ring${mods}`} style={{ x: rx, y: ry }} aria-hidden="true" />
-      <motion.div className={`cursor__dot${mods}`} style={{ x: dx, y: dy }} aria-hidden="true" />
-    </>
-  );
+  return <motion.div className={`cursor__dot${mods}`} style={{ x: dx, y: dy }} aria-hidden="true" />;
 }
 
 export function ScrollProgress() {

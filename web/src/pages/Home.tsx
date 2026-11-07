@@ -90,7 +90,7 @@ export default function Home() {
         <div className="container stack stack--lg">
           <Reveal><span className="eyebrow">The rules</span></Reveal>
           <Split className="display h-lg" text="Five rules the program checks *every time.*" />
-          <div className="grid grid--5" style={{ width: "100%", marginTop: 12 }}>
+          <div className="rules" style={{ width: "100%", marginTop: 12 }}>
             {INVARIANTS.filter((i) => i.id !== "I6").map((inv, k) => (
               <Reveal key={inv.id} delay={k * 0.06}>
                 <Tilt>
