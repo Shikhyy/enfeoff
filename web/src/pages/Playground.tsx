@@ -104,7 +104,7 @@ export default function Playground() {
     },
     {
       name: "Shared budget",
-      hint: "Resets, then follows the DEMO.md sequence",
+      hint: "Resets, then replays the recorded demo sequence",
       run: () =>
         play([
           reset,

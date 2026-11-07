@@ -1,5 +1,5 @@
 // Browser-side model of the Enfeoff program rules, used by the Playground.
-// It mirrors programs/enfeoff/src/lib.rs and SPEC.md for the cases it covers. It is a
+// It mirrors the Anchor program in programs/enfeoff/src/lib.rs for the cases it covers. It is a
 // simulation: it never reads from or writes to the chain.
 
 export const U = 1_000_000; // 1 tUSDC, 6 decimals
@@ -116,7 +116,7 @@ export function descendants(s: SimState, id: string): Mandate[] {
   return s.mandates.filter((m) => m.id !== id && chainOf(s, m.id).some((c) => c.id === id));
 }
 
-/** The scenario from DEMO.md: Captain 50, Trader 20, Merchant 15, Scout 2 under Merchant. */
+/** The demo scenario: Captain 50, Trader 20, Merchant 15, Scout 2 under Merchant. */
 export function initialState(): SimState {
   const m = (id: string, label: string, parent: string | null, depth: number, cap: number, recipients: Recipient[]): Mandate => ({
     id,
@@ -187,7 +187,7 @@ export function delegate(s: SimState, parentId: string, o: { cap: number; recipi
 }
 
 /**
- * I2 to I5: pay `recipient`. Check order follows NOTES.md: receipt, chain liveness,
+ * I2 to I5: pay `recipient`. Check order follows the program: receipt, chain liveness,
  * recipient scope, then budgets on the leaf and every ancestor.
  */
 export function spend(s: SimState, id: string, amount: number, recipient: Recipient, actionId?: string): Result {

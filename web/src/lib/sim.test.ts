@@ -48,7 +48,7 @@ describe("I2 shared budget", () => {
   it("a leaf cannot exceed its own cap", () => {
     expect(errorOf(spend(initialState(), "scout", u(3), "api"))).toBe("BudgetExceeded");
   });
-  it("the DEMO.md sequence: siblings cannot spend more than the root cap", () => {
+  it("the demo sequence: siblings cannot spend more than the root cap", () => {
     let s = initialState();
     s = must(spend(s, "trader", u(8), "pool"));
     s = must(spend(s, "merchant", u(5), "game"));
