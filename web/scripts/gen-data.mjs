@@ -1,13 +1,13 @@
-// Generates src/data/run.json from the recorded run logs in ../docs.
-// Nothing is invented here: every field is parsed from docs/devnet-run.txt,
-// docs/agent-run-scripted.txt and any docs/agent-run-live*.txt. If a log changes shape and a
+// Generates src/data/run.json from the recorded run logs in web/data.
+// Nothing is invented here: every field is parsed from web/data/devnet-run.txt,
+// web/data/agent-run-scripted.txt and any web/data/agent-run-live*.txt. If a log changes shape and a
 // field cannot be found, the script fails instead of guessing.
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const docs = resolve(here, "../../docs");
+const docs = resolve(here, "../data");
 const out = resolve(here, "../src/data/run.json");
 const runPath = resolve(docs, "devnet-run.txt");
 const agentPath = resolve(docs, "agent-run-scripted.txt");
@@ -17,7 +17,7 @@ if (!existsSync(runPath) || !existsSync(agentPath)) {
     console.log("gen-data: docs logs not found, keeping the existing src/data/run.json");
     process.exit(0);
   }
-  console.error("gen-data: docs/devnet-run.txt or docs/agent-run-scripted.txt is missing");
+  console.error("gen-data: web/data/devnet-run.txt or web/data/agent-run-scripted.txt is missing");
   process.exit(1);
 }
 
@@ -84,7 +84,7 @@ calls.forEach((c, i) => {
   c.message = results[i]?.error ?? "";
 });
 
-// Real (non-scripted) model runs: one file per provider, docs/agent-run-live*.txt.
+// Real (non-scripted) model runs: one file per provider, web/data/agent-run-live*.txt.
 const live = readdirSync(docs)
   .filter((f) => /^agent-run-live.*\.txt$/.test(f))
   .sort()
@@ -117,7 +117,7 @@ const live = readdirSync(docs)
   });
 
 const data = {
-  generatedFrom: ["docs/devnet-run.txt", "docs/agent-run-scripted.txt", ...live.map((l) => `docs/${l.file}`)],
+  generatedFrom: ["web/data/devnet-run.txt", "web/data/agent-run-scripted.txt", ...live.map((l) => `web/data/${l.file}`)],
   programId,
   mint,
   rpc,

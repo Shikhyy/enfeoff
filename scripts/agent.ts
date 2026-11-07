@@ -32,7 +32,7 @@ const PROVIDER: "anthropic" | "openrouter" | "mistral" | "groq" = process.argv.i
 const MODE = SCRIPTED ? "SCRIPTED" : `LIVE-LLM/${PROVIDER}`;
 let usedModel = "";
 const MODEL = process.env.ANTHROPIC_MODEL ?? "claude-sonnet-5-5";
-const logPath = path.join(__dirname, "..", "docs", SCRIPTED ? "agent-run-scripted.txt" : `agent-run-live-${PROVIDER}.txt`);
+const logPath = path.join(__dirname, "..", "web", "data", SCRIPTED ? "agent-run-scripted.txt" : `agent-run-live-${PROVIDER}.txt`);
 const lines: string[] = [];
 const log = (s = "") => {
   console.log(s);

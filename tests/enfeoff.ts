@@ -196,7 +196,7 @@ async function bal(owner: PublicKey) {
   }
 }
 
-/** The DEMO.md tree: Captain 50 -> Trader 20 / Merchant 15 -> Scout 2 (under Merchant). */
+/** The demo scenario tree: Captain 50 -> Trader 20 / Merchant 15 -> Scout 2 (under Merchant). */
 async function demoTree() {
   const w = await newWorld(100 * U);
   const k = {

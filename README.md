@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/web-home.jpg" alt="Enfeoff project site: Authority that can only shrink" width="860">
+<img src="assets/web-home.jpg" alt="Enfeoff project site: Authority that can only shrink" width="860">
 
 # Enfeoff
 
@@ -12,7 +12,7 @@ An agent can hand part of its mandate to a sub-agent, never more than it holds. 
 [![Rust](https://img.shields.io/badge/Rust-1.89-000000?logo=rust&logoColor=white)](https://www.rust-lang.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tests](https://img.shields.io/badge/tests-32%20passing-2EA043)](#run-it)
-[![Devnet demo](https://img.shields.io/badge/devnet%20demo-22%2F22%20steps-2EA043)](docs/devnet-run.txt)
+[![Devnet demo](https://img.shields.io/badge/devnet%20demo-22%2F22%20steps-2EA043)](web/data/devnet-run.txt)
 [![Status](https://img.shields.io/badge/status-unaudited%20devnet-E8590C)](#threat-model-and-limits)
 [![MLH](https://img.shields.io/badge/MLH-Solana%20Hackathon-D62828)](https://mlh.io)
 
@@ -98,16 +98,16 @@ flowchart LR
   A --> SDK
   SDK --> P
   P -- "signs as the vault PDA" --> VT
-  LOGS["docs/*.txt<br/>recorded run logs"] -.-> UI["Project site (web/)"]
+  LOGS["web/data/*.txt<br/>recorded run logs"] -.-> UI["Project site (web/)"]
 ```
 
 ## Demo
 
 `npm run demo` runs the scenario below and **exits non-zero if any expected outcome does not occur**. Every step, including each rejection, has an Explorer link, because rejected transactions are landed on-chain on purpose.
 
-<img src="docs/images/demo-run.png" alt="Output of npm run demo on devnet: 22 of 22 steps matched" width="900">
+<img src="assets/demo-run.png" alt="Output of npm run demo on devnet: 22 of 22 steps matched" width="900">
 
-*Real output of the recorded devnet run ([`docs/devnet-run.txt`](docs/devnet-run.txt)); links abbreviated to their signatures.*
+*Real output of the recorded devnet run ([`web/data/devnet-run.txt`](web/data/devnet-run.txt)); links abbreviated to their signatures.*
 
 1. Owner funds a vault with 50 tUSDC; root mandate "Captain", cap 50.
 2. Captain delegates Trader (20, pool only) and Merchant (15, game and API); Merchant delegates Scout (2, API only).
@@ -135,9 +135,9 @@ sequenceDiagram
 
 `scripts/agent.ts` is an agent loop bound to the Scout mandate that is shown the poisoned token metadata above. It supports Anthropic by default and Mistral, Groq or OpenRouter via `--mistral`, `--groq` and `--openrouter`.
 
-- `npm run agent -- --scripted` **forces** the malicious calls from the harness and labels the log `SCRIPTED`. It shows the chain rejecting them ([`docs/agent-run-scripted.txt`](docs/agent-run-scripted.txt)). It does **not** show that a model follows an injection.
+- `npm run agent -- --scripted` **forces** the malicious calls from the harness and labels the log `SCRIPTED`. It shows the chain rejecting them ([`web/data/agent-run-scripted.txt`](web/data/agent-run-scripted.txt)). It does **not** show that a model follows an injection.
 - Two **live** runs were done on devnet, and **in both the model refused the injection** (0 tool calls, nothing paid, so there was nothing for the chain to block):
-  Mistral `open-mistral-nemo` ([log](docs/agent-run-live-mistral.txt)) and Groq `openai/gpt-oss-120b` ([log](docs/agent-run-live-groq.txt)).
+  Mistral `open-mistral-nemo` ([log](web/data/agent-run-live-mistral.txt)) and Groq `openai/gpt-oss-120b` ([log](web/data/agent-run-live-groq.txt)).
 
 Two single runs of two models say nothing general. The fixture is deliberately blatant, which modern models tend to recognise. The on-chain bound is demonstrated by the scripted run and the tests, not by the live logs.
 
@@ -147,12 +147,12 @@ The `web/` app (React and Vite) explains the idea and lets you try a **browser-s
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/images/web-playground.jpg" alt="Delegation tree playground"><br><sub>Delegation tree playground (simulation)</sub></td>
-    <td width="50%"><img src="docs/images/web-invariants.jpg" alt="Invariants page"><br><sub>Invariants</sub></td>
+    <td width="50%"><img src="assets/web-playground.jpg" alt="Delegation tree playground"><br><sub>Delegation tree playground (simulation)</sub></td>
+    <td width="50%"><img src="assets/web-invariants.jpg" alt="Invariants page"><br><sub>Invariants</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/images/web-proof.jpg" alt="Proof page with recorded devnet run"><br><sub>Proof: the recorded devnet run</sub></td>
-    <td width="50%"><img src="docs/images/web-agent.jpg" alt="Agent run page"><br><sub>Agent runs, scripted and live</sub></td>
+    <td width="50%"><img src="assets/web-proof.jpg" alt="Proof page with recorded devnet run"><br><sub>Proof: the recorded devnet run</sub></td>
+    <td width="50%"><img src="assets/web-agent.jpg" alt="Agent run page"><br><sub>Agent runs, scripted and live</sub></td>
   </tr>
 </table>
 
@@ -160,6 +160,8 @@ The `web/` app (React and Vite) explains the idea and lets you try a **browser-s
 npm --prefix web install
 npm --prefix web run dev      # http://localhost:5173
 ```
+
+**Deploy on Vercel:** import the repository and set **Root Directory** to `web`. `web/vercel.json` sets the Vite build and the single-page routing. The site is built from the recorded logs in `web/data/`, so it needs no environment variables.
 
 ## Run it
 
@@ -175,6 +177,8 @@ Demo against the deployed devnet program. It needs no build and uses the committ
 ```bash
 RPC_URL=https://api.devnet.solana.com npm run demo
 ```
+
+To re-record the run that the site shows, save the output over the committed log (this replaces it): `RPC_URL=https://api.devnet.solana.com npm run demo > web/data/devnet-run.txt`. The agent writes its logs to `web/data/` by itself.
 
 Tests on a local validator (32 tests). A fresh clone has no program keypair, so sync the program ID first. This edits `declare_id!` locally; do not commit that change:
 
@@ -237,5 +241,5 @@ Program-level (CPI) scoping so a mandate can limit what is called and not only w
 | `scripts/` | `demo.ts`, `agent.ts`, shared helpers |
 | `fixtures/` | The poisoned token metadata used by the agent |
 | `web/` | Project site (React, Vite) |
-| `docs/` | Recorded runs, screenshots, video script |
-| `SPEC.md`, `DEMO.md`, `NOTES.md` | Program spec, demo scenario, decisions made while building |
+| `web/data/` | Recorded run logs the site is built from |
+| `assets/` | README screenshots |

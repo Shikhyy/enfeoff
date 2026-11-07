@@ -64,7 +64,7 @@ export interface RunData {
   live: LiveRun[];
 }
 
-/** Parsed from docs/devnet-run.txt and docs/agent-run-scripted.txt by scripts/gen-data.mjs. */
+/** Parsed from web/data/devnet-run.txt and web/data/agent-run-scripted.txt by scripts/gen-data.mjs. */
 export const RUN = raw as RunData;
 
 /**

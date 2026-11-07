@@ -1,5 +1,5 @@
 /**
- * Enfeoff demo: reproduces DEMO.md deterministically. Exits non-zero if any expected
+ * Enfeoff demo: reproduces the demo scenario deterministically. Exits non-zero if any expected
  * outcome (success or specific rejection) does not occur.
  *   RPC_URL=https://api.devnet.solana.com npm run demo
  */

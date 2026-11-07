@@ -1,9 +1,9 @@
 {
   "generatedFrom": [
-    "docs/devnet-run.txt",
-    "docs/agent-run-scripted.txt",
-    "docs/agent-run-live-groq.txt",
-    "docs/agent-run-live-mistral.txt"
+    "web/data/devnet-run.txt",
+    "web/data/agent-run-scripted.txt",
+    "web/data/agent-run-live-groq.txt",
+    "web/data/agent-run-live-mistral.txt"
   ],
   "programId": "HyeQCJQC7WqmpZkZq4ufAgunFZVLqjMV6dumoVHp7qoT",
   "mint": "E8T1SKQnGaCwprwyLdmm8CNcHPSqf2v1GgC21a1pqCBd",
