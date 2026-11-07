@@ -1,0 +1,105 @@
+Enfeoff demo | program HyeQCJQC7WqmpZkZq4ufAgunFZVLqjMV6dumoVHp7qoT | rpc https://api.devnet.solana.com
+Program: https://explorer.solana.com/address/HyeQCJQC7WqmpZkZq4ufAgunFZVLqjMV6dumoVHp7qoT?cluster=devnet
+
+tUSDC test mint: E8T1SKQnGaCwprwyLdmm8CNcHPSqf2v1GgC21a1pqCBd  (https://explorer.solana.com/address/E8T1SKQnGaCwprwyLdmm8CNcHPSqf2v1GgC21a1pqCBd?cluster=devnet)
+[PASS] 1    Owner creates vault
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/27kKCAt1oaWDDact2RziegVM253x362zhxNJfKK3xwCPqwgizsBNVaM3mJzL71BshTcmDyJNukk34WYc6p1w8RTE?cluster=devnet
+[PASS] 1    Owner funds vault with 50 tUSDC
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/5Jp9h2BTKg7JgrveJVCTcWfPSQUJqmgVyD8hymTpZBNbymD7PbtPQ2zf3CcdBMJyvmZr46Y8Gq1G6VTadAQn9QEb?cluster=devnet
+[PASS] 1    Root mandate Captain, cap 50
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/5LG4mrjL18fyN1pVMK9aJLT5gwcjyUX2SUSEHgnh3absrmqXZnTVKJQ56z9bhrs2pTLapNeYogUAJ3FEo6gPruvC?cluster=devnet
+[PASS] 2    Captain delegates Trader cap 20 (pool only)
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/61Hx51eJFc81xhXM7Y3svZovMNK8JgC2J2apd8xTW96rxU9n6AKzXDWq2iHRd4resG2RRQH8mzp3yj8vQ7D7Bv1a?cluster=devnet
+[PASS] 2    Captain delegates Merchant cap 15 (game, api)
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/55MqhiuRp4YWuLraXSDKFZsb9o5kULZ2odKLn12hJ2VsYoQ8YdFk8rMnrrU94AyuPMqtisB6ZmQde5P2FPCDMWMd?cluster=devnet
+ws error: Unexpected server response: 429
+[PASS] 2    Merchant delegates Scout cap 2 (api only)
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/413P8q1JqCJSkKA8NcydYYVgcH24vdEpaAmjdYHqcnVuCjzYRvALnrzz3pNWbMGEUJteVbPDykPMfcmukCEeoSou?cluster=devnet
+[PASS] 3    Trader pays pool 8 tUSDC
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/MykdYXDj8uaWdPvNZfZ1hhiYD3ZAgUB59q6X9G9cCfhUyyYxVyEkDtuJgfVRuiudsgDpbepivTnHdKsk621n1fA?cluster=devnet
+[PASS] 3    Merchant pays game 5 tUSDC
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/4dR39vfmjfN5Un8ugWLa5TuwrS7cWHH5qT79vzECC4XVQFDEsnhCYud5vkLP4QN8A9Tp7K79MDkUULfk5ZCXSsV5?cluster=devnet
+ws error: Unexpected server response: 429
+[PASS] 3    Scout pays data API 0.4 tUSDC (action_id set)
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/2chQb2ZyQa2fTYBhgdNMjXgyi5u7YoPFUDT8QZgUuJnvhEnWMM1cwgiTVi2SQLMAUxb6G8kh89meeMR28JWNfM5x?cluster=devnet
+[PASS] 4    ATTACK injection: Scout spends 50 to attacker
+       expected: RecipientNotAllowed | got: RecipientNotAllowed
+       https://explorer.solana.com/tx/2Vshk86bWMkZKZv2SbtN4YRuAktJDpSAEy9WxmZPSFDwtXRy8vBC9LK8zrz6m7xW7wS3H8RtUzxDPQVHDZpmSCsX?cluster=devnet
+[PASS] 5    ATTACK escalation: Scout delegates child cap 100
+       expected: ExceedsParentBudget | got: ExceedsParentBudget
+       https://explorer.solana.com/tx/58CVD5P4YLpMumdVQwkor9xo6Jwb5KyBpkc2FE15HJMdEgmKTMjeMVg9HtoWWmvNmnYfk1oARxMWz2fzbjDaX7Qu?cluster=devnet
+[PASS] 6    ATTACK replay: Scout repeats the paid action_id
+       expected: ReceiptExists | got: ReceiptExists
+       https://explorer.solana.com/tx/5dES3w9atoVNshanRfmqQosx71w8p2Jfj2fMjRVeVMLhPmMqCvj5qN7EqDaS53hf63wWwUKz1rsnm95DbkS3ZSuv?cluster=devnet
+[PASS] 7    Captain pays pool 25 directly (root spends too)
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/2r2f51T7SXiZpKXrBsukAgb9Kz4wNie9mQSjkWVbqEHMs59sRFBvx7mcuM9M4U31ZzMpjr5wWMdiixaUzMV4Gm6h?cluster=devnet
+[PASS] 7    Merchant pays game 6 (root total now 44.4)
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/3chFJWyABSC9QhL2FoZdYSoT7qqAJN3uHmKiA6uxwywD4nKshJ8kf6ACG7HRf9799BP76MhnHACfdo4xibgvSQvo?cluster=devnet
+[PASS] 7    Trader (12 left on own cap) tries 6: root would be 50.4
+       expected: BudgetExceeded | got: BudgetExceeded
+       https://explorer.solana.com/tx/23caCykycaSyS1CKQF76cxCk5ViSxy3sZbbT2q5ozxvPKwei8gJFSnQXmK843bKCh1sXbLNKmrWfy7oy9o5keTbu?cluster=devnet
+[PASS] 7    Trader pays pool 5.6 (root total exactly 50)
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/rcuLLGJYnxuzUuozDhUSJiEk7E1AaBHLb9HXF18HTnpoCwjjH7Dapv1G5PcbNaQyKspDE3chpd4RSGHVE4yNv3t?cluster=devnet
+[PASS] 7    Merchant tries 0.1 more: root budget exhausted
+       expected: BudgetExceeded | got: BudgetExceeded
+       https://explorer.solana.com/tx/4Nge4UnHH2GNRFbW6cMTRu8s2gz29yyEVRhpW6BN1iu8cU8Lgbq8icZsVd13aQKB4AUk5VpVJxHBZnDsmKarxaom?cluster=devnet
+[PASS] 8    Owner revokes Captain (whole tree)
+       expected: ok | got: ok
+       https://explorer.solana.com/tx/3Hs3nP9wP3a28y36rctoSp1s8T6jy67EUNjnU2g7FfaAK7g3QSHLgDmEub2w1yAr9CGEyHdkpn8m4Vkz6Zodv542?cluster=devnet
+[PASS] 8    Trader spends 0.1 after revoke
+       expected: Revoked | got: Revoked
+       https://explorer.solana.com/tx/gbU38NX5FM3utVNHqoFy3sBrNGCtLMHFkCzd12cHzSxmBC7idFpDZQwQJVpKa7nTv2EjRxYVxF45E52Bfy3WgFu?cluster=devnet
+[PASS] 8    Merchant spends 0.1 after revoke
+       expected: Revoked | got: Revoked
+       https://explorer.solana.com/tx/5g7Q3MdehoSFAjmn9dpqs3Z1VTKr6Nckg7ndsmLbTZvSKKbvKhnT9rVMirBoiYJXDLoqLWh2866juNDqydkEEwD5?cluster=devnet
+[PASS] 8    Scout spends 0.1 after revoke (grandchild)
+       expected: Revoked | got: Revoked
+       https://explorer.solana.com/tx/4CVEasWRByEjxJUYzTazkpy2sQKVB6ucWa1sBZ6oMQhH9PgjeZeGy7anY3ahV4hvueTCmB8VA1Y83kek3oZ3tDpX?cluster=devnet
+[PASS] 8    Captain spends 0.1 after revoke
+       expected: Revoked | got: Revoked
+       https://explorer.solana.com/tx/3SqZNvu95fT2iydrqcnrjXNiioZ3yAZ1Z4GdRrz9i6XoWRFtkDSqJhc7mhN9VfkTumqKmhhkpwnDnMFGfPuD3cA1?cluster=devnet
+
+getTree(vault):
+  Captain   depth 0  spent 50/50  revoked=true
+  Trader    depth 1  spent 13.6/20  revoked=false
+  Merchant  depth 1  spent 11.4/15  revoked=false
+  Scout     depth 2  spent 0.4/2  revoked=false
+
+STEP ACTION                                                    EXPECTED            RESULT                LINK
+1    Owner creates vault                                       ok                  ok                    https://explorer.solana.com/tx/27kKCAt1oaWDDact2RziegVM253x362zhxNJfKK3xwCPqwgizsBNVaM3mJzL71BshTcmDyJNukk34WYc6p1w8RTE?cluster=devnet
+1    Owner funds vault with 50 tUSDC                           ok                  ok                    https://explorer.solana.com/tx/5Jp9h2BTKg7JgrveJVCTcWfPSQUJqmgVyD8hymTpZBNbymD7PbtPQ2zf3CcdBMJyvmZr46Y8Gq1G6VTadAQn9QEb?cluster=devnet
+1    Root mandate Captain, cap 50                              ok                  ok                    https://explorer.solana.com/tx/5LG4mrjL18fyN1pVMK9aJLT5gwcjyUX2SUSEHgnh3absrmqXZnTVKJQ56z9bhrs2pTLapNeYogUAJ3FEo6gPruvC?cluster=devnet
+2    Captain delegates Trader cap 20 (pool only)               ok                  ok                    https://explorer.solana.com/tx/61Hx51eJFc81xhXM7Y3svZovMNK8JgC2J2apd8xTW96rxU9n6AKzXDWq2iHRd4resG2RRQH8mzp3yj8vQ7D7Bv1a?cluster=devnet
+2    Captain delegates Merchant cap 15 (game, api)             ok                  ok                    https://explorer.solana.com/tx/55MqhiuRp4YWuLraXSDKFZsb9o5kULZ2odKLn12hJ2VsYoQ8YdFk8rMnrrU94AyuPMqtisB6ZmQde5P2FPCDMWMd?cluster=devnet
+2    Merchant delegates Scout cap 2 (api only)                 ok                  ok                    https://explorer.solana.com/tx/413P8q1JqCJSkKA8NcydYYVgcH24vdEpaAmjdYHqcnVuCjzYRvALnrzz3pNWbMGEUJteVbPDykPMfcmukCEeoSou?cluster=devnet
+3    Trader pays pool 8 tUSDC                                  ok                  ok                    https://explorer.solana.com/tx/MykdYXDj8uaWdPvNZfZ1hhiYD3ZAgUB59q6X9G9cCfhUyyYxVyEkDtuJgfVRuiudsgDpbepivTnHdKsk621n1fA?cluster=devnet
+3    Merchant pays game 5 tUSDC                                ok                  ok                    https://explorer.solana.com/tx/4dR39vfmjfN5Un8ugWLa5TuwrS7cWHH5qT79vzECC4XVQFDEsnhCYud5vkLP4QN8A9Tp7K79MDkUULfk5ZCXSsV5?cluster=devnet
+3    Scout pays data API 0.4 tUSDC (action_id set)             ok                  ok                    https://explorer.solana.com/tx/2chQb2ZyQa2fTYBhgdNMjXgyi5u7YoPFUDT8QZgUuJnvhEnWMM1cwgiTVi2SQLMAUxb6G8kh89meeMR28JWNfM5x?cluster=devnet
+4    ATTACK injection: Scout spends 50 to attacker             RecipientNotAllowed RecipientNotAllowed   https://explorer.solana.com/tx/2Vshk86bWMkZKZv2SbtN4YRuAktJDpSAEy9WxmZPSFDwtXRy8vBC9LK8zrz6m7xW7wS3H8RtUzxDPQVHDZpmSCsX?cluster=devnet
+5    ATTACK escalation: Scout delegates child cap 100          ExceedsParentBudget ExceedsParentBudget   https://explorer.solana.com/tx/58CVD5P4YLpMumdVQwkor9xo6Jwb5KyBpkc2FE15HJMdEgmKTMjeMVg9HtoWWmvNmnYfk1oARxMWz2fzbjDaX7Qu?cluster=devnet
+6    ATTACK replay: Scout repeats the paid action_id           ReceiptExists       ReceiptExists         https://explorer.solana.com/tx/5dES3w9atoVNshanRfmqQosx71w8p2Jfj2fMjRVeVMLhPmMqCvj5qN7EqDaS53hf63wWwUKz1rsnm95DbkS3ZSuv?cluster=devnet
+7    Captain pays pool 25 directly (root spends too)           ok                  ok                    https://explorer.solana.com/tx/2r2f51T7SXiZpKXrBsukAgb9Kz4wNie9mQSjkWVbqEHMs59sRFBvx7mcuM9M4U31ZzMpjr5wWMdiixaUzMV4Gm6h?cluster=devnet
+7    Merchant pays game 6 (root total now 44.4)                ok                  ok                    https://explorer.solana.com/tx/3chFJWyABSC9QhL2FoZdYSoT7qqAJN3uHmKiA6uxwywD4nKshJ8kf6ACG7HRf9799BP76MhnHACfdo4xibgvSQvo?cluster=devnet
+7    Trader (12 left on own cap) tries 6: root would be 50.4   BudgetExceeded      BudgetExceeded        https://explorer.solana.com/tx/23caCykycaSyS1CKQF76cxCk5ViSxy3sZbbT2q5ozxvPKwei8gJFSnQXmK843bKCh1sXbLNKmrWfy7oy9o5keTbu?cluster=devnet
+7    Trader pays pool 5.6 (root total exactly 50)              ok                  ok                    https://explorer.solana.com/tx/rcuLLGJYnxuzUuozDhUSJiEk7E1AaBHLb9HXF18HTnpoCwjjH7Dapv1G5PcbNaQyKspDE3chpd4RSGHVE4yNv3t?cluster=devnet
+7    Merchant tries 0.1 more: root budget exhausted            BudgetExceeded      BudgetExceeded        https://explorer.solana.com/tx/4Nge4UnHH2GNRFbW6cMTRu8s2gz29yyEVRhpW6BN1iu8cU8Lgbq8icZsVd13aQKB4AUk5VpVJxHBZnDsmKarxaom?cluster=devnet
+8    Owner revokes Captain (whole tree)                        ok                  ok                    https://explorer.solana.com/tx/3Hs3nP9wP3a28y36rctoSp1s8T6jy67EUNjnU2g7FfaAK7g3QSHLgDmEub2w1yAr9CGEyHdkpn8m4Vkz6Zodv542?cluster=devnet
+8    Trader spends 0.1 after revoke                            Revoked             Revoked               https://explorer.solana.com/tx/gbU38NX5FM3utVNHqoFy3sBrNGCtLMHFkCzd12cHzSxmBC7idFpDZQwQJVpKa7nTv2EjRxYVxF45E52Bfy3WgFu?cluster=devnet
+8    Merchant spends 0.1 after revoke                          Revoked             Revoked               https://explorer.solana.com/tx/5g7Q3MdehoSFAjmn9dpqs3Z1VTKr6Nckg7ndsmLbTZvSKKbvKhnT9rVMirBoiYJXDLoqLWh2866juNDqydkEEwD5?cluster=devnet
+8    Scout spends 0.1 after revoke (grandchild)                Revoked             Revoked               https://explorer.solana.com/tx/4CVEasWRByEjxJUYzTazkpy2sQKVB6ucWa1sBZ6oMQhH9PgjeZeGy7anY3ahV4hvueTCmB8VA1Y83kek3oZ3tDpX?cluster=devnet
+8    Captain spends 0.1 after revoke                           Revoked             Revoked               https://explorer.solana.com/tx/3SqZNvu95fT2iydrqcnrjXNiioZ3yAZ1Z4GdRrz9i6XoWRFtkDSqJhc7mhN9VfkTumqKmhhkpwnDnMFGfPuD3cA1?cluster=devnet
+
+22/22 steps matched expectations. ALL EXPECTED OUTCOMES OCCURRED
+Note: unaudited devnet demo with a test mint (tUSDC); pool/game/api recipients are mock wallets.
