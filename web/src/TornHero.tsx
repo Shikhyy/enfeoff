@@ -76,8 +76,9 @@ export default function TornHero() {
   const backRot = useTransform(p, [0, 0.62], [0, -1.5]);
   const groundY = useTransform(p, [0, 1], ["0%", "10%"]);
   const hillsY = useTransform(p, [0, 1], ["0%", "18%"]);
-  const sceneO = useTransform(p, [0.1, 0.46], [0, 1]);
-  const sceneS = useTransform(p, [0.1, 0.7], [0.92, 1]);
+  const sceneO = useTransform(p, [0.03, 0.2], [0, 1]);
+  const sceneY = useTransform(p, [0, 0.5], ["10vh", "0vh"]);
+  const sceneS = useTransform(p, [0, 0.5], [0.94, 1]);
   const chipsY = useTransform(p, [0, 0.6], ["0vh", "-46vh"]);
   const hintO = useTransform(p, [0, 0.07], [1, 0]);
 
@@ -98,7 +99,7 @@ export default function TornHero() {
       <div className="hero__stick">
         <motion.div className="hero__ground" style={{ y: groundY }} />
         <motion.div className="hero__hills" style={{ y: hillsY }} />
-        <motion.div className="hero__scene" style={{ opacity: sceneO, scale: sceneS }}>
+        <motion.div className="hero__scene" style={{ opacity: sceneO, y: sceneY, scale: sceneS }}>
           <Scene />
         </motion.div>
         <motion.div className="hero__chips" style={{ y: chipsY }} aria-hidden="true">
